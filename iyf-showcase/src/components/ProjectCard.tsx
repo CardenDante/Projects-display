@@ -1,147 +1,96 @@
-import React, { useState } from 'react';
-import { Search, Filter, Github, Globe } from 'lucide-react';
+'use client';
 
-const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+import React from 'react';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
-  // Sample project data - replace with your actual data
-  const projects = [
-    {
-      id: 1,
-      title: "SkillBoost - Learn Enterprise",
-      student: "Evans Odhiambo",
-      category: "education",
-      description: "A learning management platform for enterprise training",
-      image: "/api/placeholder/400/300",
-      liveUrl: "https://example.com/skillboost",
-      githubUrl: "https://github.com/example/skillboost",
-      grade: "A"
-    },
-    // Add more projects here
+const NavBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/students', label: 'Students' },
+    { href: '/about', label: 'About' }
   ];
 
-  const categories = ['all', 'education', 'e-commerce', 'healthcare', 'technology'];
-
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.student.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-green-600 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
-              IYF Academy Season 7
-            </h1>
-            <p className="mt-4 text-xl text-green-100">
-              Showcasing the top 20 programming projects from our talented students
-            </p>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
+                IYF Academy
+              </span>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex md:absolute md:left-1/2 md:-translate-x-1/2">
+            <div className="flex space-x-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative text-gray-600 hover:text-green-600 transition-colors px-3 py-2 text-sm font-medium group"
+                >
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact Button */}
+          <div className="hidden md:flex">
+            <Link
+              href="/contact"
+              className="rounded-full bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+            >
+              Contact Us
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Search and Filter Section */}
-      <section className="sticky top-0 z-10 bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-            <div className="relative flex-1 max-w-lg">
-              <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search projects or students..."
-                className="w-full rounded-lg border pl-10 pr-4 py-2 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="flex items-center space-x-4">
-              <Filter className="h-5 w-5 text-gray-400" />
-              <select
-                className="rounded-lg border px-4 py-2 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="space-y-1 px-2 pb-3 pt-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-green-50 hover:text-green-600"
+                onClick={() => setIsMenuOpen(false)}
               >
-                {categories.map(category => (
-                  <option key={category} value={category}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </option>
-                ))}
-              </select>
-            </div>
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white bg-green-600 hover:bg-green-700 mt-4"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="group relative overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
-              <div className="relative h-48 w-full overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 transition-opacity duration-300 group-hover:bg-opacity-20" />
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
-                <p className="mt-2 text-sm text-gray-600">By {project.student}</p>
-                <p className="mt-4 text-sm text-gray-700">{project.description}</p>
-                
-                <div className="mt-6 flex items-center justify-between">
-                  <div className="flex space-x-4">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-green-600 hover:text-green-700"
-                    >
-                      <Globe className="mr-1 h-4 w-4" />
-                      <span className="text-sm">Live</span>
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-green-600 hover:text-green-700"
-                    >
-                      <Github className="mr-1 h-4 w-4" />
-                      <span className="text-sm">Code</span>
-                    </a>
-                  </div>
-                  <span className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-600">
-                    {project.grade}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900">About IYF Academy</h2>
-            <p className="mt-4 text-lg text-gray-600">
-              IYF Free Weekend Academy provides hands-on programming education to aspiring developers.
-              Our Season 7 cohort has produced exceptional projects showcasing various web technologies.
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+      )}
+    </nav>
   );
 };
 
-export default HomePage;
+export default NavBar;
