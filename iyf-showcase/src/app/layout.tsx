@@ -7,7 +7,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'IYF Academy',
+  title: 'Computer Programming Class',
   description: 'IYF Free Weekend Academy Season 7 Projects Showcase',
 };
 

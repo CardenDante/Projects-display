@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -14,10 +15,16 @@ const NavBar = () => {
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-lg font-semibold text-green-600">
-                IYF Academy
-              </Link>
-            </div>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="IYF Academy Logo"
+                width={145}
+                height={50}
+                className="object-contain"
+              />
+            </Link>
+          </div>
 
             {/* Desktop Navigation - Centered */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
