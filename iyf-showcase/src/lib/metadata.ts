@@ -2,11 +2,25 @@
 import type { Metadata } from 'next'
 
 export const siteConfig = {
-  name: 'IYF Academy',
-  description: 'IYF Free Weekend Academy Season 7 Programming Projects Showcase',
+  name: 'IYF Academy - Programming Projects Showcase',
+  description: 'Explore innovative projects from Season 7 of IYF Free Weekend Academy. Discover web development, React, and JavaScript projects created by talented students.',
   url: 'https://iyf-academy.com',
   ogImage: 'https://iyf-academy.com/og.jpg',
+  twitterHandle: '@iyfacademy',
+  email: 'info@iyf-academy.com',
+  phone: '+254 700 000 000',
+  address: {
+    street: '123 Developer Lane',
+    city: 'Nairobi',
+    country: 'Kenya'
+  },
+  socialLinks: {
+    github: 'https://github.com/IYF-Programming-Class',
+    twitter: 'https://twitter.com/iyfacademy',
+    linkedin: 'https://linkedin.com/company/iyf-academy'
+  }
 }
+
 
 export const defaultMetadata: Metadata = {
   title: {
@@ -16,15 +30,21 @@ export const defaultMetadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     'IYF Academy',
-    'Programming',
+    'Programming Bootcamp',
     'Web Development',
     'Student Projects',
-    'Coding Bootcamp',
-    'React',
-    'Next.js',
-    'JavaScript',
-    'TypeScript',
+    'Coding Bootcamp Kenya',
+    'React Projects',
+    'Next.js Projects',
+    'JavaScript Projects',
+    'TypeScript Projects',
+    'Frontend Development',
+    'Backend Development',
+    'Full Stack Development',
+    'Nairobi Coding School'
   ],
+  metadataBase: new URL(siteConfig.url),
+
   authors: [
     {
       name: 'IYF Academy',
@@ -39,14 +59,25 @@ export const defaultMetadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: 'IYF Academy Projects Showcase',
+      },
+    ],
   },
+
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: '@iyfacademy',
+    creator: siteConfig.twitterHandle,
+    site: siteConfig.twitterHandle,
   },
+
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',

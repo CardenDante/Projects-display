@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Search, ExternalLink, Code } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Search, ExternalLink, Code, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
 const ProjectsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 10;
+
 
   const projects = [
     {
@@ -347,9 +350,27 @@ const ProjectsPage = () => {
     }
   ];
 
-  const filteredProjects = projects.filter(project =>
-    project.student.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter projects based on search term
+  const filteredProjects = useMemo(() => 
+    projects.filter(project =>
+      project.student.toLowerCase().includes(searchTerm.toLowerCase())
+    ),
+    [searchTerm, projects]
   );
+
+  // Paginate filtered projects
+  const paginatedProjects = useMemo(() => {
+    const startIndex = (currentPage - 1) * projectsPerPage;
+    return filteredProjects.slice(startIndex, startIndex + projectsPerPage);
+  }, [filteredProjects, currentPage]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+
+  // Handle page change
+  const handlePageChange = (newPage: React.SetStateAction<number>) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className="min-h-screen">
@@ -380,7 +401,10 @@ const ProjectsPage = () => {
                 placeholder="Search students..."
                 className="w-full rounded-xl border-gray-200 pl-12 pr-4 py-3 focus:border-green-500 focus:ring-green-500 text-base"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setCurrentPage(1); // Reset to first page when searching
+                }}
               />
             </div>
           </div>
@@ -390,85 +414,106 @@ const ProjectsPage = () => {
       {/* Projects Grid - Enhanced Layout */}
       <section className="py-16 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-soft transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-              >
-                {/* Project Preview with Desktop View */}
-               {/* Project Preview with Desktop View */}
-                         <div className="w-full h-[300px] relative bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                           {/* Browser Top Bar */}
-                           <div className="bg-gray-100 border-b border-gray-200 p-3 flex items-center absolute top-0 left-0 right-0 z-10">
-                             <div className="flex space-x-2">
-                               <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
-                               <span className="inline-block w-3 h-3 bg-yellow-500 rounded-full"></span>
-                               <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
-                             </div>
-                           </div>
-                           
-                           {/* Iframe Container */}
-                           <div className="absolute inset-0 pt-12 bg-white">
-                             <iframe
-                               src={project.url}
-                               className="w-[300%] h-[300%] origin-top-left scale-[0.33] transform-gpu"
-                               style={{
-                                 transformOrigin: 'top left',
-                                 transform: 'scale(0.33)',
-                               }}
-                               title={`${project.student}'s Project - ${project.student}`}
-                               loading="eager"
-                               allow="fullscreen"
-                             />
-                           </div>
-               
-                           {/* Hover Overlay */}
-                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                             <a
-                               href={project.url}
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               className="bg-white text-gray-900 px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-100 transition-colors shadow-md"
-                             >
-                               <ExternalLink className="h-4 w-4" />
-                               View Live Project
-                             </a>
-                           </div>
-                         </div>
+          {paginatedProjects.length > 0 ? (
+            <>
+              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {paginatedProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    className="group relative overflow-hidden rounded-2xl bg-white shadow-soft transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  >
+                    {/* Project Preview with Desktop View */}
+                    <div className="w-full h-[300px] relative bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                      {/* Browser Top Bar */}
+                      <div className="bg-gray-100 border-b border-gray-200 p-3 flex items-center absolute top-0 left-0 right-0 z-10">
+                        <div className="flex space-x-2">
+                          <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+                          <span className="inline-block w-3 h-3 bg-yellow-500 rounded-full"></span>
+                          <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+                        </div>
+                      </div>
+                      
+                      {/* Iframe Container */}
+                      <div className="absolute inset-0 pt-12 bg-white">
+                        <iframe
+                          src={project.url}
+                          className="w-[300%] h-[300%] origin-top-left scale-[0.33] transform-gpu"
+                          style={{
+                            transformOrigin: 'top left',
+                            transform: 'scale(0.33)',
+                          }}
+                          title={`${project.student}'s Project - ${project.student}`}
+                          loading="eager"
+                          allow="fullscreen"
+                        />
+                      </div>
+        
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-white text-gray-900 px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-100 transition-colors shadow-md"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          View Live Project
+                        </a>
+                      </div>
+                    </div>
 
-                {/* Project Info */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h2 className="text-lg font-semibold text-gray-900">
-                      {project.student}
-                    </h2>
-                    <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700">
-                      {project.grade}
-                    </span>
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <h2 className="text-lg font-semibold text-gray-900">
+                          {project.student}
+                        </h2>
+                        <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700">
+                          {project.grade}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Code className="h-4 w-4" />
+                        <span>Season 7 Project</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Code className="h-4 w-4" />
-                    <span>Season 7 Project</span>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+
+              {/* Pagination Controls */}
+              <div className="flex justify-center items-center mt-8 space-x-4">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronLeft className="h-5 w-5 text-gray-700" />
+                </button>
+                <span className="text-sm text-gray-700">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronRight className="h-5 w-5 text-gray-700" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No projects found
+              </h3>
+              <p className="text-gray-600">
+                Try adjusting your search terms to find what you're looking for.
+              </p>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Empty State - When no projects match search */}
-      {filteredProjects.length === 0 && (
-        <div className="text-center py-12">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
-            No projects found
-          </h3>
-          <p className="text-gray-600">
-            Try adjusting your search terms to find what you're looking for.
-          </p>
-        </div>
-      )}
     </div>
   );
 };

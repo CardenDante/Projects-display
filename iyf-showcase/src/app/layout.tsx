@@ -1,17 +1,22 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
-import NavBar from '@/components/NavBar';
+import NavBar from '../components/NavBar';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github } from 'lucide-react';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Computer Programming Class',
-  description: 'IYF Free Weekend Academy Season 7 Projects Showcase',
+  title: 'IYF Academy - Programming Projects Showcase',
+  description: 'Explore innovative projects from Season 7 of IYF Free Weekend Academy. Discover web development, React, and JavaScript projects created by talented students.',
+  metadataBase: new URL('https://iyf-academy.com'),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
@@ -21,7 +26,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              "name": "IYF Academy",
+              "url": "https://iyf-academy.com",
+              "description": "IYF Free Weekend Academy provides comprehensive programming education through weekend sessions.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "123 Developer Lane",
+                "addressLocality": "Nairobi",
+                "addressCountry": "Kenya"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+254 700 000 000",
+                "contactType": "customer service"
+              }
+            })
+          }}
+        />
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <NavBar />
           <main className="flex-grow">{children}</main>

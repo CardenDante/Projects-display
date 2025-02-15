@@ -5,43 +5,87 @@ import { ExternalLink, ArrowRight, Star, Code, Globe, Github } from 'lucide-reac
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Featured projects data
+const featuredProjects = [
+  {
+    id: 1,
+    title: "Doctor Finder",
+    student: "Gabriel Esma",
+    description: "A comprehensive healthcare web application designed to streamline medical professional discovery and patient-doctor connections, offering intuitive search and detailed professional profiles.",
+    image: "/api/placeholder/400/300",
+    category: "Healthcare",
+    liveUrl: "https://gabriel1abc.github.io/final-project/?authuser=0",
+    githubUrl: "https://gabriel1abc.github.io",
+    grade: "Graded"
+  },
+  {
+    id: 2,
+    title: "Furniture",
+    student: "Jacktone Many",
+    description: "An elegant online furniture showcase featuring a curated collection of contemporary and classic furniture pieces, with detailed product descriptions and an immersive browsing experience.",
+    image: "/api/placeholder/400/300",
+    category: "Education",
+    liveUrl: "https://jacktonemony.github.io/furniture-shop/?authuser=0",
+    githubUrl: "https://jacktonemony.github.io",
+    grade: "Graded"
+  },
+  {
+    id: 3,
+    title: "Coffee Site",
+    student: "Maxwel Odhiambo",
+    description: "An innovative digital platform celebrating coffee culture, featuring an engaging online cafe experience with detailed coffee selections, brewing tips, and seamless ordering capabilities.",
+    image: "/api/placeholder/400/300",
+    category: "Transportation",
+    liveUrl: "https://maxintoke.github.io/Coffee_time/?authuser=0",
+    githubUrl: "https://maxintoke.github.io",
+    grade: "Graded"
+  }
+];
+
 const HomePage = () => {
-  // Featured projects data based on the image provided
-  const featuredProjects = [
-    {
-      id: 1,
-      title: "Doctor Finder",
-      student: "Gabriel Esma",
-      description: "A comprehensive healthcare web application designed to streamline medical professional discovery and patient-doctor connections, offering intuitive search and detailed professional profiles.",
-      image: "/api/placeholder/400/300",
-      category: "Healthcare",
-      liveUrl: "https://gabriel1abc.github.io/final-project/?authuser=0",
-      githubUrl: "https://gabriel1abc.github.io",
-      grade: "Graded"
-    },
-    {
-      id: 2,
-      title: "Furniture",
-      student: "Jacktone Many",
-      description: "An elegant online furniture showcase featuring a curated collection of contemporary and classic furniture pieces, with detailed product descriptions and an immersive browsing experience.",
-      image: "/api/placeholder/400/300",
-      category: "Education",
-      liveUrl: "https://jacktonemony.github.io/furniture-shop/?authuser=0",
-      githubUrl: "https://jacktonemony.github.io",
-      grade: "Graded"
-    },
-    {
-      id: 3,
-      title: "Coffee Site",
-      student: "Maxwel Odhiambo",
-      description: "An innovative digital platform celebrating coffee culture, featuring an engaging online cafe experience with detailed coffee selections, brewing tips, and seamless ordering capabilities.",
-      image: "/api/placeholder/400/300",
-      category: "Transportation",
-      liveUrl: "https://maxintoke.github.io/Coffee_time/?authuser=0",
-      githubUrl: "https://maxintoke.github.io",
-      grade: "Graded"
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "IYF Academy Projects Showcase",
+    "description": "Explore innovative projects from Season 7 of IYF Free Weekend Academy",
+    "url": "https://iyf-academy.com",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Doctor Finder",
+            "description": "A comprehensive healthcare web application",
+            "url": "https://gabriel1abc.github.io/final-project/?authuser=0"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Furniture",
+            "description": "An elegant online furniture showcase",
+            "url": "https://jacktonemony.github.io/furniture-shop/?authuser=0"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Coffee Site",
+            "description": "An innovative digital platform celebrating coffee culture",
+            "url": "https://maxintoke.github.io/Coffee_time/?authuser=0"
+          }
+        }
+      ]
     }
-  ];
+  };
 
   const stats = [
     { value: "20+", label: "Projects Completed" },
@@ -68,7 +112,11 @@ const HomePage = () => {
   ];
 
   return (
-     <div className="min-h-screen">
+    <div className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Hero Section */}
       <section className="relative bg-green-600 min-h-[600px] flex items-center">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -247,7 +295,7 @@ const HomePage = () => {
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl shadow-xl lg:aspect-auto lg:h-[600px]">
               <Image
                 src="/home1.jpg"
-                alt="Programming Course"
+                alt="Students working on programming projects at IYF Academy"
                 fill
                 className="object-cover"
                 priority
