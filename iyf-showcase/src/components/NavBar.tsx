@@ -15,16 +15,16 @@ const NavBar = () => {
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             {/* Logo */}
             <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/logo.png"
-                alt="IYF Academy Logo"
-                width={145}
-                height={50}
-                className="object-contain"
-              />
-            </Link>
-          </div>
+              <Link href="/" className="flex items-center">
+                <Image
+                  src="/logo.png"
+                  alt="IYF Academy Logo"
+                  width={145}
+                  height={50}
+                  className="object-contain"
+                />
+              </Link>
+            </div>
 
             {/* Desktop Navigation - Centered */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
@@ -44,15 +44,17 @@ const NavBar = () => {
               </nav>
             </div>
 
-            {/* Contact Button */}
-            <a
-              href="https://freeacademy.iyfkenya.org/register"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-green-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
-            >
-              Join Us
-            </a>
+            {/* Join Us Button - Desktop Only */}
+            <div className="hidden md:block">
+              <a
+                href="https://freeacademy.iyfkenya.org/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-green-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+              >
+                Join Us
+              </a>
+            </div>
 
             {/* Mobile menu button */}
             <div className="flex md:hidden">
@@ -99,13 +101,13 @@ const NavBar = () => {
                 About
               </Link>
               <a
-              href="https://freeacademy.iyfkenya.org/register"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-4 rounded-full bg-green-600 px-4 py-1.5 text-center text-sm font-medium text-white hover:bg-green-700"
-            >
-              Join Us
-            </a>
+                href="https://freeacademy.iyfkenya.org/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 px-3 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-full text-center"
+              >
+                Join Us
+              </a>
             </nav>
           </div>
         )}
