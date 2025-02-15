@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Code, Users, Star, Book, Terminal, Database, Globe, Clock } from 'lucide-react';
+import {  Clock } from 'lucide-react';
 
 const AboutPage = () => {
   const stats = [

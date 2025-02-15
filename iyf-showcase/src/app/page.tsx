@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ExternalLink, ArrowRight, Star, Code, Globe, Github, ChevronRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Star, Code, Globe, Github } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -113,7 +113,7 @@ const HomePage = () => {
         </div>
       </section>
 
-     {/* Featured Projects Section - Updated with previews */}
+  {/* Featured Projects Section */}
 <section id="featured-projects" className="py-24 bg-gray-50">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="text-center">
@@ -131,21 +131,39 @@ const HomePage = () => {
           key={project.id} 
           className="group relative overflow-hidden rounded-2xl bg-white shadow-soft transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
         >
-          {/* Project Preview with iframe */}
-          <div className="aspect-[4/3] w-full relative bg-gray-100">
-            <iframe
-              src={project.liveUrl}
-              className="w-full h-full absolute inset-0 border-none rounded-t-2xl"
-              title={`${project.student}'s Project - ${project.title}`}
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-t-2xl" />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          {/* Project Preview with Desktop View */}
+          <div className="w-full h-[300px] relative bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200">
+            {/* Browser Top Bar */}
+            <div className="bg-gray-100 border-b border-gray-200 p-3 flex items-center absolute top-0 left-0 right-0 z-10">
+              <div className="flex space-x-2">
+                <span className="inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+                <span className="inline-block w-3 h-3 bg-yellow-500 rounded-full"></span>
+                <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
+              </div>
+            </div>
+            
+            {/* Iframe Container */}
+            <div className="absolute inset-0 pt-12 bg-white">
+              <iframe
+                src={project.liveUrl}
+                className="w-[300%] h-[300%] origin-top-left scale-[0.33] transform-gpu"
+                style={{
+                  transformOrigin: 'top left',
+                  transform: 'scale(0.33)',
+                }}
+                title={`${project.student}'s Project - ${project.title}`}
+                loading="eager"
+                allow="fullscreen"
+              />
+            </div>
+
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-gray-900 px-6 py-3 rounded-full flex items-center gap-2 hover:bg-green-50 transition-colors shadow-md"
+                className="bg-white text-gray-900 px-6 py-3 rounded-full flex items-center gap-2 hover:bg-gray-100 transition-colors shadow-md"
               >
                 <ExternalLink className="h-4 w-4" />
                 View Live Project
@@ -194,7 +212,6 @@ const HomePage = () => {
     </div>
   </div>
 </section>
-
       {/* Course Overview Section - Updated */}
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
