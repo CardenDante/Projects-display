@@ -45,14 +45,14 @@ const NavBar = () => {
             </div>
 
             {/* Contact Button */}
-            <div className="hidden md:block">
-              <Link 
-                href="/contact"
-                className="rounded-full bg-green-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
-              >
-                Contact
-              </Link>
-            </div>
+            <a
+              href="https://freeacademy.iyfkenya.org/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-green-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-green-700 transition-colors"
+            >
+              Join Us
+            </a>
 
             {/* Mobile menu button */}
             <div className="flex md:hidden">
@@ -98,13 +98,14 @@ const NavBar = () => {
               >
                 About
               </Link>
-              <Link 
-                href="/contact" 
-                className="mt-2 block rounded-full bg-green-600 px-4 py-1.5 text-center text-sm font-medium text-white hover:bg-green-700"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
+              <a
+              href="https://freeacademy.iyfkenya.org/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-4 rounded-full bg-green-600 px-4 py-1.5 text-center text-sm font-medium text-white hover:bg-green-700"
+            >
+              Join Us
+            </a>
             </nav>
           </div>
         )}

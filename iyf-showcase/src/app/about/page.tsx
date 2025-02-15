@@ -102,7 +102,7 @@ const AboutPage = () => {
             <div className="mt-8 lg:mt-0 lg:w-1/2 lg:pl-8">
               <div className="relative h-64 rounded-lg overflow-hidden">
                 <Image
-                  src="/api/placeholder/600/400"
+                  src="/pc.jpg"
                   alt="IYF Academy Journey"
                   fill
                   className="object-cover"
@@ -169,7 +169,7 @@ const AboutPage = () => {
           </p>
           <div className="mt-8">
             <a
-              href="/contact"
+              href="https://freeacademy.iyfkenya.org/register"
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-green-50"
             >
               Apply Now

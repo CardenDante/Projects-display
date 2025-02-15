@@ -12,40 +12,40 @@ const HomePage = () => {
       id: 1,
       title: "Doctor Finder",
       student: "Gabriel Esma",
-      description: "A healthcare platform to find and connect with medical professionals",
+      description: "A comprehensive healthcare web application designed to streamline medical professional discovery and patient-doctor connections, offering intuitive search and detailed professional profiles.",
       image: "/api/placeholder/400/300",
       category: "Healthcare",
-      liveUrl: "https://example.com/doctor-finder",
-      githubUrl: "https://github.com/example/doctor-finder",
+      liveUrl: "https://gabriel1abc.github.io/final-project/?authuser=0",
+      githubUrl: "https://gabriel1abc.github.io",
       grade: "Graded"
     },
     {
       id: 2,
-      title: "SkillBoost",
-      student: "Evans Odhiambo",
-      description: "Learning management system for enterprise training",
+      title: "Furniture",
+      student: "Jacktone Many",
+      description: "An elegant online furniture showcase featuring a curated collection of contemporary and classic furniture pieces, with detailed product descriptions and an immersive browsing experience.",
       image: "/api/placeholder/400/300",
       category: "Education",
-      liveUrl: "https://example.com/skillboost",
-      githubUrl: "https://github.com/fai2-web/flip",
+      liveUrl: "https://jacktonemony.github.io/furniture-shop/?authuser=0",
+      githubUrl: "https://jacktonemony.github.io",
       grade: "Graded"
     },
     {
       id: 3,
-      title: "Viper Cab",
-      student: "Fidel Oluoch",
-      description: "Modern transportation and ride-hailing platform",
+      title: "Coffee Site",
+      student: "Maxwel Odhiambo",
+      description: "An innovative digital platform celebrating coffee culture, featuring an engaging online cafe experience with detailed coffee selections, brewing tips, and seamless ordering capabilities.",
       image: "/api/placeholder/400/300",
       category: "Transportation",
-      liveUrl: "https://example.com/viper-cab",
-      githubUrl: "https://github.com/example/viper-cab",
+      liveUrl: "https://maxintoke.github.io/Coffee_time/?authuser=0",
+      githubUrl: "https://maxintoke.github.io",
       grade: "Graded"
     }
   ];
 
   const stats = [
     { value: "20+", label: "Projects Completed" },
-    { value: "15+", label: "Technologies Used" },
+    { value: "10+", label: "Technologies Used" },
     { value: "100%", label: "Completion Rate" }
   ];
 
@@ -229,7 +229,7 @@ const HomePage = () => {
             </div>
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl shadow-xl lg:aspect-auto lg:h-[600px]">
               <Image
-                src="/api/placeholder/600/400"
+                src="/home1.jpg"
                 alt="Programming Course"
                 fill
                 className="object-cover"
