@@ -6,7 +6,7 @@ import './globals.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Github } from 'lucide-react';
-
+import ClarityScript from '../components/ClarityScript'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <ClarityScript />
       </head>
       <body className={inter.className}>
         <script
