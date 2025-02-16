@@ -134,7 +134,7 @@ const HomePage = () => {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="#projects"
+              href="/projects"
               className="rounded-full bg-white px-8 py-3 text-base font-semibold text-green-600 hover:bg-green-50 transition-colors"
             >
               View Projects
