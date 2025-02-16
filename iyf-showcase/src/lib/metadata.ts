@@ -4,10 +4,10 @@ import type { Metadata } from 'next'
 export const siteConfig = {
   name: 'IYF Academy - Programming Projects Showcase',
   description: 'Explore innovative projects from Season 7 of IYF Free Weekend Academy. Discover web development, React, and JavaScript projects created by talented students.',
-  url: 'https://iyf-academy.com',
-  ogImage: 'https://iyf-academy.com/og.jpg',
+  url: 'https://programming-iyf.harak-a.xyz',
+  ogImage: 'https://programming-iyf.harak-a.xyz/og.jpg',
   twitterHandle: '@iyfacademy',
-  email: 'info@iyf-academy.com',
+  email: 'info@programming-iyf.harak-a.xyz',
   phone: '+254 700 000 000',
   address: {
     street: '123 Developer Lane',

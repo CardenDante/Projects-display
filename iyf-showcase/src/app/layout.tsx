@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'IYF Academy - Programming Projects Showcase',
   description: 'Explore innovative projects from Season 7 of IYF Free Weekend Academy. Discover web development, React, and JavaScript projects created by talented students.',
-  metadataBase: new URL('https://iyf-academy.com'),
+  metadataBase: new URL('https://programming-iyf.harak-a.xyz'),
   alternates: {
     canonical: '/',
   },
@@ -37,7 +37,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "EducationalOrganization",
               "name": "IYF Academy",
-              "url": "https://iyf-academy.com",
+              "url": "https://programming-iyf.harak-a.xyz",
               "description": "IYF Free Weekend Academy provides comprehensive programming education through weekend sessions.",
               "address": {
                 "@type": "PostalAddress",

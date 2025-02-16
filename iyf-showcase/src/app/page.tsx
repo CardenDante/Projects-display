@@ -49,7 +49,7 @@ const HomePage = () => {
     "@type": "WebPage",
     "name": "IYF Academy Projects Showcase",
     "description": "Explore innovative projects from Season 7 of IYF Free Weekend Academy",
-    "url": "https://iyf-academy.com",
+    "url": "https://programming-iyf.harak-a.xyz",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
