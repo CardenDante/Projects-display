@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+
+import React, { useState, useMemo } from 'react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const StudentsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 10;
 
   // Top performers first (sorted by score)
   const students = [
@@ -127,10 +130,27 @@ const StudentsPage = () => {
     "Elvis Otieno",
     "Chul loang Chuol"
   ];
-  
-  const filteredStudents = students.filter(student =>
-    student.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter students based on search term
+  const filteredStudents = useMemo(() => 
+    students.filter(student =>
+      student.toLowerCase().includes(searchTerm.toLowerCase())
+    ),
+    [searchTerm, students]
   );
+
+  // Paginate filtered students
+  const paginatedStudents = useMemo(() => {
+    const startIndex = (currentPage - 1) * studentsPerPage;
+    return filteredStudents.slice(startIndex, startIndex + studentsPerPage);
+  }, [filteredStudents, currentPage]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredStudents.length / studentsPerPage);
+
+  // Handle page change
+  const handlePageChange = (newPage: React.SetStateAction<number>) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className="min-h-screen pt-16">
@@ -161,7 +181,10 @@ const StudentsPage = () => {
               placeholder="Search students..."
               className="w-full rounded-lg border-gray-200 pl-10 pr-4 py-2 focus:border-green-500 focus:ring-green-500"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page when searching
+              }}
             />
           </div>
         </div>
@@ -170,37 +193,71 @@ const StudentsPage = () => {
       {/* Students List */}
       <section className="py-12 bg-gray-50">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            <ul className="divide-y divide-gray-200">
-              {filteredStudents.map((student, index) => (
-                <li
-                  key={index}
-                  className="relative group hover:bg-green-50 transition-colors"
+          {paginatedStudents.length > 0 ? (
+            <>
+              <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <ul className="divide-y divide-gray-200">
+                  {paginatedStudents.map((student, index) => (
+                    <li
+                      key={index}
+                      className="relative group hover:bg-green-50 transition-colors"
+                    >
+                      <div className="flex items-center px-6 py-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <span className="text-green-600 font-medium">
+                              {student.split(' ').map(word => word[0]).join('')}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="ml-4">
+                          <p className="text-sm font-medium text-gray-900">{student}</p>
+                          <p className="text-sm text-gray-500">Season 7 Student</p>
+                        </div>
+                        <div className="ml-auto">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-600">
+                              View Profile
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="flex justify-center items-center mt-8 space-x-4">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
                 >
-                  <div className="flex items-center px-6 py-4">
-                    <div className="flex-shrink-0">
-                      <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                        <span className="text-green-600 font-medium">
-                          {student.split(' ').map(word => word[0]).join('')}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-900">{student}</p>
-                      <p className="text-sm text-gray-500">Season 7 Student</p>
-                    </div>
-                    <div className="ml-auto">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-600">
-                          View Profile
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  <ChevronLeft className="h-5 w-5 text-gray-700" />
+                </button>
+                <span className="text-sm text-gray-700">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
+                >
+                  <ChevronRight className="h-5 w-5 text-gray-700" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                No students found
+              </h3>
+              <p className="text-gray-600">
+                Try adjusting your search terms to find what you're looking for.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </div>
