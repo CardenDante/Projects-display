@@ -123,7 +123,7 @@ const AlumniPage = () => {
         </div>
       </section>
 
-      {/* Season Timeline */}
+    {/* Season Timeline */}
 <section className="py-24 bg-gray-50">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-16">
@@ -131,16 +131,34 @@ const AlumniPage = () => {
       <p className="text-lg text-gray-600">Explore the evolution and growth of our programming academy</p>
     </div>
 
-    {/* Season Selector - Pills */}
-    <div className="flex overflow-x-auto pb-8 hide-scrollbar">
-      <div className="flex space-x-4 mx-auto">
+    {/* Season Selector - Grid for mobile, Pills for desktop */}
+    <div className="mb-12">
+      {/* Mobile Season Selector - Grid */}
+      <div className="grid grid-cols-3 gap-2 md:hidden">
+        {seasons.map((season) => (
+          <motion.button
+            key={season.number}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setSelectedSeason(season.number)}
+            className={`p-3 rounded-xl text-sm font-medium transition-all duration-300
+              ${selectedSeason === season.number 
+                ? 'bg-green-600 text-white shadow-lg' 
+                : 'bg-white text-gray-600 hover:bg-green-50 shadow'}`}
+          >
+            S{season.number}
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Desktop Season Selector - Pills */}
+      <div className="hidden md:flex justify-center space-x-4">
         {seasons.map((season) => (
           <motion.button
             key={season.number}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setSelectedSeason(season.number)}
-            className={`flex-shrink-0 px-8 py-4 rounded-full text-base font-medium transition-all duration-300
+            className={`px-8 py-4 rounded-full text-base font-medium transition-all duration-300
               ${selectedSeason === season.number 
                 ? 'bg-green-600 text-white shadow-lg' 
                 : 'bg-white text-gray-600 hover:bg-green-50 shadow'}`}
@@ -151,63 +169,70 @@ const AlumniPage = () => {
       </div>
     </div>
 
-    {/* Selected Season Details - Improved Card Design */}
+    {/* Selected Season Details - Mobile Optimized */}
     <motion.div
       key={selectedSeason}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mt-12"
+      className="mt-8"
     >
       {seasons.map((season) => (
         season.number === selectedSeason && (
           <div key={season.number} className="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div className="grid md:grid-cols-2">
-              {/* Left Column - Season Information */}
-              <div className="p-8 lg:p-12">
-                <div className="inline-block px-6 py-2 bg-green-50 rounded-full text-green-600 font-semibold mb-8">
+            <div className="md:grid md:grid-cols-2">
+              {/* Content Section - Now on the left for desktop */}
+              <div className="p-6 md:p-8">
+                {/* Season Label - Moved from image overlay to content section for desktop */}
+                <div className="inline-block px-4 py-1 bg-green-600/90 rounded-full text-sm mb-6 text-white md:mb-8">
                   Season {season.number} • {season.year}
                 </div>
-                <div className="space-y-8">
-                  <div>
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="h-16 w-16 rounded-2xl bg-green-100 flex items-center justify-center">
-                        <GraduationCap className="h-8 w-8 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-4xl font-bold text-gray-900">{season.graduates}</p>
-                        <p className="text-gray-600">Graduates</p>
-                      </div>
-                    </div>
+
+                {/* Graduates Count */}
+                <div className="flex items-center gap-4 mb-8 bg-green-50 p-4 rounded-2xl">
+                  <div className="h-14 w-14 rounded-xl bg-green-100 flex items-center justify-center">
+                    <GraduationCap className="h-7 w-7 text-green-600" />
                   </div>
-                  
                   <div>
+                    <p className="text-3xl font-bold text-gray-900">{season.graduates}</p>
+                    <p className="text-gray-600">Graduates</p>
+                  </div>
+                </div>
+
+                {/* Season Details */}
+                <div className="space-y-6">
+                  {/* Highlight */}
+                  <div className="bg-gray-50 rounded-2xl p-5">
                     <h3 className="text-lg font-medium text-gray-900 mb-3">Season Highlight</h3>
-                    <div className="bg-gray-50 rounded-xl p-4">
-                      <p className="text-gray-600">{season.highlight}</p>
-                    </div>
+                    <p className="text-gray-600">{season.highlight}</p>
                   </div>
 
-                  <div>
+                  {/* Achievement */}
+                  <div className="bg-gray-50 rounded-2xl p-5">
                     <h3 className="text-lg font-medium text-gray-900 mb-3">Key Achievement</h3>
-                    <div className="bg-gray-50 rounded-xl p-4">
-                      <div className="flex items-start gap-3">
-                        <Trophy className="h-5 w-5 text-green-600 mt-1 flex-shrink-0" />
-                        <p className="text-gray-600">{season.achievement}</p>
-                      </div>
+                    <div className="flex items-start gap-3">
+                      <Trophy className="h-5 w-5 text-green-600 mt-1 flex-shrink-0" />
+                      <p className="text-gray-600">{season.achievement}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column - Image */}
-              <div className="relative h-full min-h-[400px] bg-gray-100">
+              {/* Image Section - Now on the right for desktop */}
+              <div className="relative h-[200px] md:h-full">
                 <Image
-                   src={seasonImages[season.number - 1]}
+                  src={seasonImages[season.number - 1]}
                   alt={`Season ${season.number} Highlights`}
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                {/* Gradient overlay - Only visible on mobile */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent md:hidden">
+                  <div className="absolute bottom-0 left-0 p-6 text-white md:hidden">
+                    <div className="inline-block px-4 py-1 bg-green-600/90 rounded-full text-sm mb-2">
+                      Season {season.number} • {season.year}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
