@@ -41,6 +41,9 @@ const NavBar = () => {
                 <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-green-600">
                   About
                 </Link>
+                <Link href="/alumni" className="text-sm font-medium text-gray-700 hover:text-green-600">
+                  Alumni
+                </Link>
               </nav>
             </div>
 
@@ -99,6 +102,13 @@ const NavBar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                href="/alumni" 
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-green-600 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Alumni
               </Link>
               <a
                 href="https://freeacademy.iyfkenya.org/register"

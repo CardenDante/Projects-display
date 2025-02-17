@@ -100,6 +100,14 @@ export default function RootLayout({
                       </Link>
                     </li>
                     <li>
+                      <Link 
+                        href="/alumni" 
+                        className="text-sm text-gray-500 hover:text-green-600 transition-colors"
+                      >
+                        Alumni
+                      </Link>
+                    </li>
+                    <li>
                       <a 
                         href="https://freeacademy.iyfkenya.org/register" 
                         target="_blank"
