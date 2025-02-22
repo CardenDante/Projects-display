@@ -84,7 +84,7 @@ const AboutPage = () => {
   const faqs: FAQ[] = [
     {
       question: "How long is the program?",
-     answer: "The program runs for 24 weeks, with classes held during weekends. Each session is carefully structured to ensure comprehensive learning while accommodating working professionals and students."
+     answer: "The program runs for 12 weeks, with classes held during weekends. Each session is carefully structured to ensure comprehensive learning while accommodating working professionals and students."
     },
     {
       question: "What are the prerequisites?",
