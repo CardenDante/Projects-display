@@ -88,7 +88,7 @@ const AboutPage = () => {
     },
     {
       question: "What are the prerequisites?",
-      answer: "No prior programming experience is required. However, basic computer literacy and a strong desire to learn are essential. You'll need a laptop and reliable internet connection."
+      answer: "No prior programming experience is required. However, basic computer literacy and a strong desire to learn are essential."
     },
     {
       question: "What will I be able to build after the course?",
