@@ -40,7 +40,7 @@ const AboutPage = () => {
   const stats: Stat[] = [
     { value: "7", label: "Successful Seasons" },
     { value: "500+", label: "Graduates" },
-    { value: "24", label: "Weeks Per Season" }
+    { value: "12", label: "Weeks Per Season" }
   ];
 
   const techStack = [
@@ -60,22 +60,22 @@ const AboutPage = () => {
 
   const courseOutline = [
     {
-      title: "Weeks 1-2",
+      title: "Weeks 1-3",
       content: "Introduction to Web Development and Linux",
       topics: ["Web Development Basics", "Linux Commands", "HTML & CSS Fundamentals"]
     },
     {
-      title: "Weeks 3-4",
+      title: "Weeks 4-5",
       content: "Advanced HTML, CSS, and JavaScript",
       topics: ["Semantic HTML", "CSS Layout", "JavaScript Basics"]
     },
     {
-      title: "Weeks 5-6",
+      title: "Weeks 6-9",
       content: "JavaScript and Front-End Frameworks",
       topics: ["Advanced JavaScript", "React Fundamentals", "State Management"]
     },
     {
-      title: "Weeks 7-8",
+      title: "Weeks 10-12",
       content: "Node.js and Backend Development",
       topics: ["Node.js Basics", "Express.js", "MongoDB Integration"]
     }
