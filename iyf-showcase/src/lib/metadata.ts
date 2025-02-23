@@ -41,8 +41,18 @@ export const defaultMetadata: Metadata = {
     'Frontend Development',
     'Backend Development',
     'Full Stack Development',
-    'Nairobi Coding School'
+    'Nairobi Coding School',
+    'React Portfolio Projects',
+    'Next.js Showcase Examples',
+    'JavaScript Project Gallery',
+    'Web Development Case Studies',
+    'Programming Project Showcase',
+    'Student Developer Portfolios',
+    'Coding Bootcamp Projects',
+    'Kenya Tech Education',
+    'Software Development Training'
   ],
+
   metadataBase: new URL(siteConfig.url),
 
   authors: [

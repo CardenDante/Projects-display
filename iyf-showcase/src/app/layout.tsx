@@ -55,6 +55,38 @@ export default function RootLayout({
             })
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [{
+                "@type": "Question",
+                "name": "What is IYF Academy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "IYF Academy is a free weekend programming bootcamp based in Nairobi, Kenya, offering comprehensive web development training."
+                }
+              }, {
+                "@type": "Question",
+                "name": "What technologies are taught?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We teach modern web development technologies including React, Next.js, JavaScript, TypeScript, and full stack development."
+                }
+              }, {
+                "@type": "Question",
+                "name": "How can I join IYF Academy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Visit our registration page at freeacademy.iyfkenya.org/register to apply for the next cohort."
+                }
+              }]
+            })
+          }}
+        />
+
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <NavBar />
           <main className="flex-grow">{children}</main>
