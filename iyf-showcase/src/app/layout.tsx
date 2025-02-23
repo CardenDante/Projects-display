@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Github } from 'lucide-react';
 import ClarityScript from '../components/ClarityScript'
-import WhatsAppFloat from '../components/WhatsAppFloat'
+// import WhatsAppFloat from '../components/WhatsAppFloat'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -90,7 +90,7 @@ export default function RootLayout({
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <NavBar />
           <main className="flex-grow">{children}</main>
-          <WhatsAppFloat />
+          {/* <WhatsAppFloat /> */}
           <footer className="bg-white border-t">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
               <div className="flex flex-col items-center">
