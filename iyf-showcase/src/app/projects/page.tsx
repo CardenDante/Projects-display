@@ -7,7 +7,7 @@ import Image from 'next/image';
 const ProjectsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 10;
+  const projectsPerPage = 12;
 
 
   const projects = [
