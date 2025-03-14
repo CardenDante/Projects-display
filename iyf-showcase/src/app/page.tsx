@@ -261,28 +261,26 @@ const HomePage = () => {
                     
                     {/* Links */}
                     <div className="mt-6 flex items-center justify-between pt-4 border-t">
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
-                      >
-                        <Globe className="mr-2 h-4 w-4" />
-                        Live Demo
-                      </a>
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
-                        >
-                          <Github className="mr-2 h-4 w-4" />
-                          Code
-                        </a>
-                      )}
-                    </div>
+                    <a 
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
+                    >
+                      <Globe className="mr-2 h-4 w-4" />
+                      Live Demo
+                    </a>
+                    <a
+                      href={project.githubUrl ? project.githubUrl.split('/').slice(0, -1).join('/') : `https://github.com/search?q=${encodeURIComponent(project.student)}&type=users`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
+                    >
+                      <Github className="mr-2 h-4 w-4" />
+                      Connect with ME
+                    </a>
                   </div>
+                </div>
                 </div>
               ))}
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState, useEffect } from 'react';
-import { Search, ExternalLink, Code, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import { Search, ExternalLink, Code, ChevronLeft, ChevronRight, Filter, Github, Globe } from 'lucide-react';
 import SeasonSelector from '@/components/SeasonSelector';
 import { useSeasons } from '@/lib/contexts/SeasonContext';
 
@@ -86,6 +86,19 @@ const ProjectsPage = () => {
   // Handle page change
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
+  };
+
+  // Get GitHub profile URL from repository URL
+  const getGitHubProfileUrl = (repoUrl?: string): string | undefined => {
+    if (!repoUrl) return undefined;
+    
+    // Extract the username part from the GitHub URL
+    const parts = repoUrl.split('/');
+    if (parts.length >= 4 && parts[2] === 'github.com') {
+      return `https://github.com/${parts[3]}`;
+    }
+    
+    return undefined;
   };
 
   return (
@@ -224,31 +237,62 @@ const ProjectsPage = () => {
                       </div>
                     </div>
 
-                    {/* Project Info */}
+                   {/* Project Info */}
                     <div className="p-6">
-                      <div className="flex items-center justify-between mb-1">
-                        <h2 className="text-lg font-semibold text-gray-900">
-                          {project.student}
-                        </h2>
-                      </div>
-                      {/* Season Badge */}
-                      <div className="flex items-center mb-2">
-                        <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
+                      <div className="mb-4 flex items-center justify-between">
+                        <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700">
+                          {project.category || 'Project'}
+                        </span>
+                        <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
                           {project.season}
                         </span>
-                        <span className="mx-2 text-gray-300">•</span>
-                        <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
-                          {project.grade}
-                        </span>
                       </div>
-                      {project.title && (
-                        <h3 className="text-md font-medium text-gray-700 mb-2">
-                          {project.title}
-                        </h3>
-                      )}
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Code className="h-4 w-4" />
-                        <span>{project.category || 'Project'}</span>
+                      
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
+                        {project.title || `${project.student}'s Project`}
+                      </h3>
+                      
+                      {/* Student name with GitHub profile link - Always showing GitHub button */}
+                      <div className="mt-2 flex items-center justify-between">
+                        <div className="flex items-center">
+                          <p className="text-sm text-gray-500">By </p>
+                          <p className="ml-1 text-sm font-medium text-gray-900">{project.student}</p>
+                        </div>
+                        
+                        {/* GitHub Profile Link - Always visible */}
+                        <a 
+                          href={project.githubUrl ? project.githubUrl.split('/').slice(0, -1).join('/') : `https://github.com/search?q=${encodeURIComponent(project.student)}&type=users`}
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="ml-1 inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800 hover:bg-gray-200 transition-colors"
+                        >
+                          <Github className="mr-1 h-3 w-3" />
+                          GitHub Profile
+                        </a>
+                      </div>
+                      
+                      <p className="mt-4 text-gray-600 line-clamp-2">{project.description || 'A student project from IYF Academy'}</p>
+                      
+                      {/* Links */}
+                      <div className="mt-6 flex items-center justify-between pt-4 border-t">
+                        <a 
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
+                        >
+                          <Globe className="mr-2 h-4 w-4" />
+                          Live Demo
+                        </a>
+                        <a
+                          href={project.githubUrl ? project.githubUrl.split('/').slice(0, -1).join('/') : `https://github.com/search?q=${encodeURIComponent(project.student)}&type=users`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
+                        >
+                          <Github className="mr-2 h-4 w-4" />
+                          Connect with ME
+                        </a>
                       </div>
                     </div>
                   </div>

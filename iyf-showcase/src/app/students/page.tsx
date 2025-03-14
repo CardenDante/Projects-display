@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Search, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Filter, Github } from 'lucide-react';
 import { useSeasons } from '@/lib/contexts/SeasonContext';
 
 interface Student {
   id: number;
   name: string;
   seasonId: number;
-  season: string; // Add season name
+  season: string; // Season name
   profileUrl?: string;
 }
 
@@ -189,37 +189,38 @@ const StudentsPage = () => {
                 <ul className="divide-y divide-gray-200">
                   {paginatedStudents.map((student) => (
                     <li
-                      key={student.id}
-                      className="relative group hover:bg-green-50 transition-colors"
-                    >
-                      <div className="flex items-center px-6 py-4">
-                        <div className="flex-shrink-0">
-                          <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                            <span className="text-green-600 font-medium">
-                              {getInitials(student.name)}
-                            </span>
-                          </div>
+                    key={student.id}
+                    className="relative group hover:bg-green-50 transition-colors"
+                  >
+                    <div className="flex items-center px-6 py-4">
+                      <div className="flex-shrink-0">
+                        <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                          <span className="text-green-600 font-medium">
+                            {getInitials(student.name)}
+                          </span>
                         </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium text-gray-900">{student.name}</p>
-                          <p className="text-sm text-gray-500">{student.season}</p>
-                        </div>
-                        {student.profileUrl && (
-                          <div className="ml-auto">
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                              <a
-                                href={student.profileUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-600"
-                              >
-                                View Profile
-                              </a>
-                            </div>
-                          </div>
-                        )}
                       </div>
-                    </li>
+                      <div className="ml-4 flex-grow">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm font-medium text-gray-900">{student.name}</p>
+                            <p className="text-sm text-gray-500">{student.season}</p>
+                          </div>
+                          
+                          {/* Always visible GitHub button */}
+                          <a
+                            href={student.profileUrl || `https://github.com/search?q=${encodeURIComponent(student.name)}&type=users`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800 hover:bg-gray-200 transition-colors"
+                          >
+                            <Github className="mr-1 h-3 w-3" />
+                            GitHub
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
                   ))}
                 </ul>
               </div>
