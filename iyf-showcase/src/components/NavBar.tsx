@@ -4,9 +4,12 @@ import React from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import SeasonSelector from './SeasonSelector';
+import { useSeasons } from '@/lib/contexts/SeasonContext';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { isLoading } = useSeasons();
 
   return (
     <header className="fixed w-full bg-white z-50">
@@ -44,11 +47,15 @@ const NavBar = () => {
                 <Link href="/alumni" className="text-sm font-medium text-gray-700 hover:text-green-600">
                   Alumni
                 </Link>
+                {/* <Link href="/admin" className="text-sm font-medium text-gray-700 hover:text-green-600">
+                  Admin
+                </Link> */}
               </nav>
             </div>
 
-            {/* Join Us Button - Desktop Only */}
-            <div className="hidden md:block">
+            {/* Season Selector and Join Us Button - Desktop Only */}
+            <div className="hidden md:flex items-center space-x-4">
+              {!isLoading && <SeasonSelector />}
               <a
                 href="https://freeacademy.iyfkenya.org/register"
                 target="_blank"
@@ -75,6 +82,7 @@ const NavBar = () => {
         {isMenuOpen && (
           <div className="border-t border-gray-200 bg-white md:hidden">
             <nav className="flex flex-col space-y-1 px-4 py-2">
+              {!isLoading && <div className="px-3 py-2"><SeasonSelector /></div>}
               <Link 
                 href="/" 
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-green-600 rounded-lg"
@@ -110,6 +118,13 @@ const NavBar = () => {
               >
                 Alumni
               </Link>
+              {/* <Link 
+                href="/admin" 
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-green-600 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin
+              </Link> */}
               <a
                 href="https://freeacademy.iyfkenya.org/register"
                 target="_blank"
