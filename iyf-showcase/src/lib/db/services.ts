@@ -282,7 +282,7 @@ export const projectService = {
         project.url,
         project.githubUrl,
         project.category,
-        project.isFeatured ? 1 : 0,
+        project.isFeatured ? 1 : 0, // Convert boolean to integer here
         project.grade
       ]);
     }
