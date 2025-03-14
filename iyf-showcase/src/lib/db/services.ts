@@ -214,6 +214,7 @@ export const projectService = {
       SELECT 
         p.*, 
         s.name as student,
+        s.profileUrl as profileUrl,
         seas.name as season
       FROM projects p
       JOIN students s ON p.studentId = s.id
